@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Code Playground output viewer.">
+  <title>Code Output · Code Playground</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body data-theme="dark" class="output-page">
+  <div class="output-shell">
+    <header class="topbar output-topbar">
+      <div class="brand-lockup">
+        <a class="brand-mark" href="./index.html" aria-label="Back to Code Playground"><span>{</span><i></i><span>></span></a>
+        <div><a class="brand-name" href="./index.html">Code Output</a><span class="session-label"><span class="status-dot"></span> Isolated result</span></div>
+      </div>
+      <nav class="command-bar" aria-label="Output actions">
+        <a class="tool-button" href="./index.html">← Back to editor</a>
+        <button class="tool-button run-button" id="output-refresh-btn">↻ Refresh output</button>
+      </nav>
+    </header>
+    <main class="output-main">
+      <section class="output-preview-card">
+        <div class="output-card-heading"><div><span class="eyebrow">Rendered result</span><h1 id="output-title">Waiting for a project</h1></div><span class="run-status" id="output-status"><span class="status-dot neutral"></span> Waiting</span></div>
+        <div class="output-stage" id="output-stage">
+          <div class="preview-empty" id="output-empty"><div class="preview-orbit"><span></span><span></span><span></span></div><h3>Nothing to run yet</h3><p>Open this page from the editor after running a project.</p><a class="tool-button" href="./index.html">Back to editor</a></div>
+          <iframe id="output-frame" title="Rendered code output" sandbox="allow-scripts" hidden></iframe>
+          <div class="terminal-output output-terminal" id="output-terminal" hidden><div class="terminal-header"><span>Python output</span><span id="output-python-status">Ready</span></div><pre id="output-python-text"></pre></div>
+        </div>
+      </section>
+      <section class="output-details-card">
+        <div class="console-heading"><div class="console-tabs" role="tablist"><button class="console-tab active" data-output-tab="console">Console <span id="output-console-count">0</span></button><button class="console-tab" data-output-tab="errors">Errors <span id="output-error-count">0</span></button></div><div class="console-actions"><button class="text-button" id="output-copy-btn">Copy</button><button class="text-button" id="output-clear-btn">Clear</button></div></div>
+        <div class="console-body output-console-body" id="output-console-body" role="log" aria-live="polite"></div>
+      </section>
+    </main>
+    <footer class="output-footer"><span>Runs locally in your browser.</span><span>External resources may be fetched by preview code.</span></footer>
+  </div>
+  <div class="toast-region" id="toast-region" aria-live="polite"></div>
+  <script type="module" src="./js/output.js"></script>
+</body>
+</html>

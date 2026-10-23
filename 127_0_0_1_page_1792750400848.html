@@ -1,0 +1,378 @@
+<html lang="en" style="--code-size: 14px;"><head><style>.ͼo.cm-focused {outline: 1px dotted #212121;}
+.ͼo {position: relative !important; box-sizing: border-box; display: flex !important; flex-direction: column;}
+.ͼo .cm-scroller {display: flex !important; align-items: flex-start !important; font-family: monospace; line-height: 1.4; height: 100%; overflow-x: auto; position: relative; z-index: 0; overflow-anchor: none;}
+.ͼo .cm-content[contenteditable=true] {-webkit-user-modify: read-write-plaintext-only;}
+.ͼo .cm-content {margin: 0; flex-grow: 2; flex-shrink: 0; display: block; white-space: pre; word-wrap: normal; box-sizing: border-box; min-height: 100%; padding: 4px 0; outline: none;}
+.ͼo .cm-lineWrapping {white-space: pre-wrap; white-space: break-spaces; word-break: break-word; overflow-wrap: anywhere; flex-shrink: 1;}
+.ͼp .cm-content {caret-color: black;}
+.ͼq .cm-content {caret-color: white;}
+.ͼo .cm-line {display: block; padding: 0 2px 0 6px;}
+.ͼo .cm-layer > * {position: absolute;}
+.ͼo .cm-layer {position: absolute; left: 0; top: 0; contain: size style;}
+.ͼp .cm-selectionBackground {background: #d9d9d9;}
+.ͼq .cm-selectionBackground {background: #222;}
+.ͼp.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground {background: #d7d4f0;}
+.ͼq.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground {background: #233;}
+.ͼo .cm-cursorLayer {pointer-events: none;}
+.ͼo.cm-focused > .cm-scroller > .cm-cursorLayer {animation: steps(1) cm-blink 1.2s infinite;}
+@keyframes cm-blink {50% {opacity: 0;}}
+@keyframes cm-blink2 {50% {opacity: 0;}}
+.ͼo .cm-cursor, .ͼo .cm-dropCursor {border-left: 1.2px solid black; margin-left: -0.6px; pointer-events: none;}
+.ͼo .cm-cursor {display: none;}
+.ͼq .cm-cursor {border-left-color: #ddd;}
+.ͼo .cm-dropCursor {position: absolute;}
+.ͼo.cm-focused > .cm-scroller > .cm-cursorLayer .cm-cursor {display: block;}
+.ͼo .cm-iso {unicode-bidi: isolate;}
+.ͼo .cm-announced {position: fixed; top: -10000px;}
+@media print {.ͼo .cm-announced {display: none;}}
+.ͼp .cm-activeLine {background-color: #cceeff44;}
+.ͼq .cm-activeLine {background-color: #99eeff33;}
+.ͼp .cm-specialChar {color: red;}
+.ͼq .cm-specialChar {color: #f78;}
+.ͼo .cm-gutters {flex-shrink: 0; display: flex; height: 100%; box-sizing: border-box; inset-inline-start: 0; z-index: 200;}
+.ͼp .cm-gutters {background-color: #f5f5f5; color: #6c6c6c; border-right: 1px solid #ddd;}
+.ͼq .cm-gutters {background-color: #333338; color: #ccc;}
+.ͼo .cm-gutter {display: flex !important; flex-direction: column; flex-shrink: 0; box-sizing: border-box; min-height: 100%; overflow: hidden;}
+.ͼo .cm-gutterElement {box-sizing: border-box;}
+.ͼo .cm-lineNumbers .cm-gutterElement {padding: 0 3px 0 5px; min-width: 20px; text-align: right; white-space: nowrap;}
+.ͼp .cm-activeLineGutter {background-color: #e2f2ff;}
+.ͼq .cm-activeLineGutter {background-color: #222227;}
+.ͼo .cm-panels {box-sizing: border-box; position: sticky; left: 0; right: 0; z-index: 300;}
+.ͼp .cm-panels {background-color: #f5f5f5; color: black;}
+.ͼp .cm-panels-top {border-bottom: 1px solid #ddd;}
+.ͼp .cm-panels-bottom {border-top: 1px solid #ddd;}
+.ͼq .cm-panels {background-color: #333338; color: white;}
+.ͼo .cm-tab {display: inline-block; overflow: hidden; vertical-align: bottom;}
+.ͼo .cm-widgetBuffer {vertical-align: text-top; height: 1em; width: 0; display: inline;}
+.ͼo .cm-placeholder {color: #888; display: inline-block; vertical-align: top; user-select: none;}
+.ͼo .cm-highlightSpace {background-image: radial-gradient(circle at 50% 55%, #aaa 20%, transparent 5%); background-position: center;}
+.ͼo .cm-highlightTab {background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="20"><path stroke="%23888" stroke-width="1" fill="none" d="M1 10H196L190 5M190 15L196 10M197 4L197 16"/></svg>'); background-size: auto 100%; background-position: right 90%; background-repeat: no-repeat;}
+.ͼo .cm-trailingSpace {background-color: #ff332255;}
+.ͼo .cm-button {vertical-align: middle; color: inherit; font-size: 70%; padding: .2em 1em; border-radius: 1px;}
+.ͼp .cm-button:active {background-image: linear-gradient(#b4b4b4, #d0d3d6);}
+.ͼp .cm-button {background-image: linear-gradient(#eff1f5, #d9d9df); border: 1px solid #888;}
+.ͼq .cm-button:active {background-image: linear-gradient(#111, #333);}
+.ͼq .cm-button {background-image: linear-gradient(#393939, #111); border: 1px solid #888;}
+.ͼo .cm-textfield {vertical-align: middle; color: inherit; font-size: 70%; border: 1px solid silver; padding: .2em .5em;}
+.ͼp .cm-textfield {background-color: white;}
+.ͼq .cm-textfield {border: 1px solid #555; background-color: inherit;}
+</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A private browser-based code playground for HTML, CSS, JavaScript, and Python.">
+  <title>Code Playground</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body data-theme="dark" class="editor-no-wrap">
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand-lockup">
+        <a class="brand-mark" href="./index.html" aria-label="Code Playground home" data-manus_clickable="true" data-manus_click_id="1"><span>{</span><i></i><span>&gt;</span></a>
+        <div>
+          <a class="brand-name" href="./index.html" data-manus_clickable="true" data-manus_click_id="2">Code Playground</a>
+          <span class="session-label"><span class="status-dot"></span> Temporary session</span>
+        </div>
+      </div>
+      <nav class="command-bar" aria-label="Workspace actions">
+        <button class="tool-button subtle" id="home-btn" title="Go to the editor home" data-manus_clickable="true" data-manus_click_id="3">Home</button>
+        <span class="toolbar-divider"></span>
+        <button class="tool-button" id="new-file-btn" data-manus_clickable="true" data-manus_click_id="4"><span class="button-icon">＋</span> New file</button>
+        <button class="tool-button" id="open-file-btn" data-manus_clickable="true" data-manus_click_id="5"><span class="button-icon">↥</span> Open</button>
+        <button class="tool-button" id="save-file-btn" data-manus_clickable="true" data-manus_click_id="6"><span class="button-icon">↓</span> Save</button>
+        <button class="tool-button run-button" id="run-btn" data-manus_clickable="true" data-manus_click_id="7"><span class="run-icon">▶</span> Run code <kbd>⌘↵</kbd></button>
+        <button class="tool-button" id="open-output-btn" data-manus_clickable="true" data-manus_click_id="8">Open output</button>
+        <button class="tool-button subtle" id="reset-btn" data-manus_clickable="true" data-manus_click_id="9">Reset</button>
+        <button class="icon-button" id="theme-toggle" title="Toggle theme" aria-label="Toggle theme" data-manus_clickable="true" data-manus_click_id="10">☼</button>
+        <button class="icon-button" id="settings-btn" title="Open settings" aria-label="Open settings" data-manus_clickable="true" data-manus_click_id="11">⚙</button>
+      </nav>
+      <input type="file" id="file-input" multiple="" hidden="">
+    </header>
+
+    <main class="workspace" id="workspace">
+      <aside class="panel explorer-panel" id="explorer-panel">
+        <div class="panel-heading">
+          <div>
+            <span class="eyebrow">Workspace</span>
+            <h2>Files</h2>
+          </div>
+          <button class="panel-action" id="explorer-new-btn" aria-label="New file" title="New file" data-manus_clickable="true" data-manus_click_id="12">＋</button>
+        </div>
+        <div class="project-tree" id="file-list" role="tree" aria-label="Project files"><div class="file-tree-root"><span>⌄</span> My Project</div><div class="file-item" role="treeitem" tabindex="0"><button class="file-item" aria-label="Open index.html" style="padding: 0px; width: 100%;" data-manus_clickable="true" data-manus_click_id="13"><span class="file-glyph html">HTML</span><span class="file-name">index.html</span><span class="file-modified" title="Unsaved changes" hidden=""></span><span class="file-item-actions"><button class="file-mini-action" title="Rename file">✎</button><button class="file-mini-action" title="Delete file">×</button></span></button></div><div class="file-item active" role="treeitem" tabindex="0"><button class="file-item" aria-label="Open main.py" style="padding: 0px; width: 100%;" data-manus_clickable="true" data-manus_click_id="14"><span class="file-glyph python">PY</span><span class="file-name">main.py</span><span class="file-modified" title="Unsaved changes" hidden=""></span><span class="file-item-actions"><button class="file-mini-action" title="Rename file" data-manus_clickable="true" data-manus_click_id="15">✎</button><button class="file-mini-action" title="Delete file" data-manus_clickable="true" data-manus_click_id="16">×</button></span></button></div><div class="file-item" role="treeitem" tabindex="0"><button class="file-item" aria-label="Open script.js" style="padding: 0px; width: 100%;" data-manus_clickable="true" data-manus_click_id="17"><span class="file-glyph js">JS</span><span class="file-name">script.js</span><span class="file-modified" title="Unsaved changes" hidden=""></span><span class="file-item-actions"><button class="file-mini-action" title="Rename file">✎</button><button class="file-mini-action" title="Delete file">×</button></span></button></div><div class="file-item" role="treeitem" tabindex="0"><button class="file-item" aria-label="Open style.css" style="padding: 0px; width: 100%;" data-manus_clickable="true" data-manus_click_id="18"><span class="file-glyph css">CSS</span><span class="file-name">style.css</span><span class="file-modified" title="Unsaved changes" hidden=""></span><span class="file-item-actions"><button class="file-mini-action" title="Rename file">✎</button><button class="file-mini-action" title="Delete file">×</button></span></button></div></div>
+        <div class="explorer-footer">
+          <span class="file-count" id="file-count">4 files</span>
+          <button class="text-button danger-text" id="clear-project-btn" data-manus_clickable="true" data-manus_click_id="19">Clear project</button>
+        </div>
+      </aside>
+      <div class="resize-handle" data-resize="files" role="separator" aria-label="Resize file explorer" tabindex="0"></div>
+
+      <section class="panel editor-panel" id="editor-panel">
+        <div class="editor-heading">
+          <div class="open-tabs" id="open-tabs" role="tablist" aria-label="Open files"><button class="file-tab" role="tab" aria-selected="false" data-manus_clickable="true" data-manus_click_id="20"><span class="file-glyph html">HTML</span><span>index.html</span><span class="tab-close" title="Close tab">×</span></button><button class="file-tab" role="tab" aria-selected="false" data-manus_clickable="true" data-manus_click_id="21"><span class="file-glyph css">CSS</span><span>style.css</span><span class="tab-close" title="Close tab">×</span></button><button class="file-tab" role="tab" aria-selected="false" data-manus_clickable="true" data-manus_click_id="22"><span class="file-glyph js">JS</span><span>script.js</span><span class="tab-close" title="Close tab">×</span></button><button class="file-tab active" role="tab" aria-selected="true" data-manus_clickable="true" data-manus_click_id="23"><span class="file-glyph python">PY</span><span>main.py</span><span class="tab-close" title="Close tab">×</span></button></div>
+          <div class="editor-actions">
+            <span class="language-badge" id="language-badge">PYTHON</span>
+            <span class="dirty-indicator" id="dirty-indicator" hidden="">Unsaved changes</span>
+          </div>
+        </div>
+        <div class="editor-host word-wrap-off" id="editor-host">
+          <div class="editor-empty" id="editor-empty" hidden="">
+            <div class="empty-glyph">{ }</div>
+            <h3>No file selected</h3>
+            <p>Create or open a file to start writing code.</p>
+            <button class="tool-button run-button" id="empty-new-btn" data-manus_clickable="true" data-manus_click_id="24">＋ New file</button>
+          </div>
+          <div id="code-editor" aria-label="Code editor" style="--code-size: 14px;"><div class="cm-editor cm-focused ͼo ͼp "><div class="cm-announced" aria-live="polite"></div><div tabindex="-1" class="cm-scroller"><div spellcheck="false" autocorrect="off" autocapitalize="off" writingsuggestions="false" translate="no" contenteditable="true" style="tab-size: 4;" class="cm-content" role="textbox" aria-multiline="true" data-manus_clickable="true" data-manus_click_id="25"><div class="cm-line" data-manus_clickable="true" data-manus_click_id="26">print("Hello World from Python!")</div><div class="cm-line" data-manus_clickable="true" data-manus_click_id="27">for i in range(1, 6):</div><div class="cm-line" data-manus_clickable="true" data-manus_click_id="28">    print(i)</div></div></div></div></div>
+        </div>
+        <div class="editor-footer">
+          <span id="cursor-position">Ln 1, Col 1</span>
+          <span class="footer-spacer"></span>
+          <span id="encoding-label">UTF-8</span>
+          <span id="language-footer">Python</span>
+        </div>
+      </section>
+      <div class="resize-handle" data-resize="preview" role="separator" aria-label="Resize output preview" tabindex="0"></div>
+
+      <aside class="panel preview-panel" id="preview-panel">
+        <div class="panel-heading preview-heading">
+          <div>
+            <span class="eyebrow">Live surface</span>
+            <h2>Output</h2>
+          </div>
+          <div class="preview-tools">
+            <span class="run-status" id="run-status"><span class="status-dot "></span> Preview updated</span>
+            <button class="icon-button small" id="refresh-preview-btn" title="Refresh output" aria-label="Refresh output" data-manus_clickable="true" data-manus_click_id="29">↻</button>
+          </div>
+        </div>
+        <div class="preview-stage" id="preview-stage">
+          <div class="preview-empty" id="preview-empty" hidden="">
+            <div class="preview-orbit"><span></span><span></span><span></span></div>
+            <h3>Run your project</h3>
+            <p>The result will appear in this isolated preview.</p>
+            <button class="tool-button run-button" id="preview-run-btn" data-manus_clickable="true" data-manus_click_id="30"><span class="run-icon">▶</span> Run code</button>
+          </div>
+          <div class="terminal-output" id="terminal-output" hidden="">
+            <div class="terminal-header"><span>Python output</span><span id="python-runtime-status">Ready</span></div>
+            <pre id="python-output-text" aria-live="polite"></pre>
+            <div class="python-input-row" id="python-input-row" hidden="">
+              <label for="python-input">Program input</label>
+              <div class="input-with-button"><input id="python-input" type="text" autocomplete="off" placeholder="Input is requested in a browser prompt"><button class="tool-button" id="submit-python-input">Submit</button></div>
+            </div>
+          </div>
+          <iframe id="preview-frame" title="Rendered output preview" sandbox="allow-scripts" srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;&lt;script&gt;
+(() =&gt; {
+  const token = &quot;d8a8d8a2-281e-45f0-a6a3-c643a4a048dd-1792750371772&quot;;
+  const send = (kind, payload = {}) =&gt; { try { parent.postMessage({ channel: 'code-playground-preview', token, kind, ...payload }, '*'); } catch (_) {} };
+  const stringify = value =&gt; { try { return typeof value === 'string' ? value : JSON.stringify(value, null, 2); } catch (_) { return String(value); } };
+  ['log', 'info', 'warn', 'error', 'debug'].forEach(level =&gt; {
+    const original = console[level];
+    console[level] = (...args) =&gt; { send('console', { level, args: args.map(stringify) }); original.apply(console, args); };
+  });
+  addEventListener('error', event =&gt; send('error', { message: event.message || 'Script error', source: event.filename || '', line: event.lineno || 0 }));
+  addEventListener('unhandledrejection', event =&gt; send('error', { message: stringify(event.reason || 'Unhandled promise rejection') }));
+  addEventListener('load', () =&gt; send('ready', { message: 'Preview ready' }));
+  send('status', { message: 'Preview booted' });
+})();
+&lt;/script&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+  &lt;title&gt;My First Website&lt;/title&gt;
+  &lt;style data-playground-source=&quot;style.css&quot;&gt;:root {
+  font-family: Inter, system-ui, sans-serif;
+  color: #17200f;
+  background: #f5f5f5;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  background: #f5f5f5;
+}
+
+.hero {
+  padding: 48px;
+}
+
+.eyebrow {
+  color: #6caa29;
+  font: 700 12px/1.2 monospace;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+h1 {
+  color: #4c8618;
+  font-size: clamp(2.4rem, 8vw, 5rem);
+  margin: 10px 0;
+}
+
+button {
+  border: 0;
+  border-radius: 999px;
+  padding: 11px 20px;
+  color: #17200f;
+  background: #b8f36b;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+button:hover { background: #9bdb4f; }
+.message { min-height: 1.5em; color: #4c8618; }&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;main class=&quot;hero&quot;&gt;
+    &lt;p class=&quot;eyebrow&quot;&gt;Code Playground&lt;/p&gt;
+    &lt;h1&gt;Hello World!&lt;/h1&gt;
+    &lt;p&gt;Welcome to Code Playground.&lt;/p&gt;
+    &lt;button id=&quot;myButton&quot;&gt;Click me&lt;/button&gt;
+    &lt;p id=&quot;message&quot; class=&quot;message&quot; aria-live=&quot;polite&quot;&gt;&lt;/p&gt;
+  &lt;/main&gt;
+  &lt;script  data-playground-source=&quot;script.js&quot;&gt;const button = document.getElementById('myButton');
+const message = document.getElementById('message');
+
+button.addEventListener('click', () =&gt; {
+  message.textContent = 'Connected files are working!';
+  console.log('The button was clicked.');
+});&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;"><!DOCTYPE html><html lang="en"><head><script>
+(() => {
+  const token = "d8a8d8a2-281e-45f0-a6a3-c643a4a048dd-1792750371772";
+  const send = (kind, payload = {}) => { try { parent.postMessage({ channel: 'code-playground-preview', token, kind, ...payload }, '*'); } catch (_) {} };
+  const stringify = value => { try { return typeof value === 'string' ? value : JSON.stringify(value, null, 2); } catch (_) { return String(value); } };
+  ['log', 'info', 'warn', 'error', 'debug'].forEach(level => {
+    const original = console[level];
+    console[level] = (...args) => { send('console', { level, args: args.map(stringify) }); original.apply(console, args); };
+  });
+  addEventListener('error', event => send('error', { message: event.message || 'Script error', source: event.filename || '', line: event.lineno || 0 }));
+  addEventListener('unhandledrejection', event => send('error', { message: stringify(event.reason || 'Unhandled promise rejection') }));
+  addEventListener('load', () => send('ready', { message: 'Preview ready' }));
+  send('status', { message: 'Preview booted' });
+})();
+</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My First Website</title>
+  <style data-playground-source="style.css">:root {
+  font-family: Inter, system-ui, sans-serif;
+  color: #17200f;
+  background: #f5f5f5;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  background: #f5f5f5;
+}
+
+.hero {
+  padding: 48px;
+}
+
+.eyebrow {
+  color: #6caa29;
+  font: 700 12px/1.2 monospace;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+h1 {
+  color: #4c8618;
+  font-size: clamp(2.4rem, 8vw, 5rem);
+  margin: 10px 0;
+}
+
+button {
+  border: 0;
+  border-radius: 999px;
+  padding: 11px 20px;
+  color: #17200f;
+  background: #b8f36b;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+button:hover { background: #9bdb4f; }
+.message { min-height: 1.5em; color: #4c8618; }</style>
+</head>
+<body>
+  <main class="hero">
+    <p class="eyebrow">Code Playground</p>
+    <h1>Hello World!</h1>
+    <p>Welcome to Code Playground.</p>
+    <button id="myButton">Click me</button>
+    <p id="message" class="message" aria-live="polite"></p>
+  </main>
+  <script data-playground-source="script.js">const button = document.getElementById('myButton');
+const message = document.getElementById('message');
+
+button.addEventListener('click', () => {
+  message.textContent = 'Connected files are working!';
+  console.log('The button was clicked.');
+});</script>
+
+</body></html></iframe>
+        </div>
+      </aside>
+    </main>
+
+    <section class="console-dock" id="console-dock">
+      <div class="console-heading">
+        <div class="console-tabs" role="tablist" aria-label="Output details">
+          <button class="console-tab active" role="tab" aria-selected="true" data-console-tab="console" data-manus_clickable="true" data-manus_click_id="31">Console <span id="console-count">6</span></button>
+          <button class="console-tab" role="tab" aria-selected="false" data-console-tab="errors" data-manus_clickable="true" data-manus_click_id="32">Errors <span id="error-count">0</span></button>
+          <button class="console-tab" role="tab" aria-selected="false" data-console-tab="status" data-manus_clickable="true" data-manus_click_id="33">Status</button>
+        </div>
+        <div class="console-actions"><button id="stop-btn" class="text-button danger-text" hidden="">Stop</button>
+          <span id="execution-status" class="execution-status">Preview updated</span>
+          <button class="text-button" id="copy-console-btn" data-manus_clickable="true" data-manus_click_id="34">Copy</button>
+          <button class="text-button" id="clear-console-btn" data-manus_clickable="true" data-manus_click_id="35">Clear</button>
+          <button class="text-button" id="toggle-console-btn" data-manus_clickable="true" data-manus_click_id="36">Hide</button>
+        </div>
+      </div>
+      <div class="console-body" id="console-body" role="log" aria-live="polite"><div class="console-line info"><span class="console-level">info</span><span class="console-message">Welcome project loaded.</span></div><div class="console-line info"><span class="console-level">info</span><span class="console-message">Your source stays in this browser session.</span></div><div class="console-line info"><span class="console-level">info</span><span class="console-message">Running index.html.</span></div><div class="console-line info"><span class="console-level">info</span><span class="console-message">Preview booted</span></div><div class="console-line success"><span class="console-level">success</span><span class="console-message">Preview ready</span></div><div class="console-line warn"><span class="console-level">warn</span><span class="console-message">Preview is still running. A long-running script may be blocking the page.</span></div></div>
+    </section>
+  </div>
+
+  <dialog class="modal" id="file-dialog">
+    <form method="dialog" id="file-form" class="modal-card">
+      <div class="modal-heading"><div><span class="eyebrow">Project file</span><h2 id="file-dialog-title">New file</h2></div><button class="modal-close" value="cancel" aria-label="Close">×</button></div>
+      <label class="field-label" for="file-name-input">File name</label>
+      <input class="text-input" id="file-name-input" name="fileName" placeholder="e.g. app.js" autocomplete="off" required="">
+      <p class="field-help">Supported extensions: .html, .css, .js, and .py</p>
+      <div class="modal-actions"><button class="tool-button" value="cancel">Cancel</button><button class="tool-button run-button" id="file-submit-btn" value="default">Create file</button></div>
+    </form>
+  </dialog>
+
+  <dialog class="modal" id="settings-dialog">
+    <form method="dialog" class="modal-card settings-card" id="settings-form">
+      <div class="modal-heading"><div><span class="eyebrow">Workspace preferences</span><h2>Settings</h2></div><button class="modal-close" value="cancel" aria-label="Close">×</button></div>
+      <div class="settings-grid">
+        <label class="setting-row"><span>Editor theme</span><select id="setting-theme"><option value="dark">Dark</option><option value="light">Light</option></select></label>
+        <label class="setting-row"><span>Font size <output id="font-size-output">14px</output></span><input id="setting-font-size" type="range" min="12" max="24" step="1" value="14"></label>
+        <label class="setting-row"><span>Word wrap</span><input id="setting-word-wrap" type="checkbox"></label>
+        <label class="setting-row"><span>Line numbers</span><input id="setting-line-numbers" type="checkbox" checked=""></label>
+        <label class="setting-row"><span>Auto-save <small>Disabled by default</small></span><select id="setting-autosave"><option value="disabled">Disabled</option><option value="session">Session only</option></select></label>
+        <label class="setting-row"><span>Output mode</span><select id="setting-output-mode"><option value="same">Same page</option><option value="separate">Separate page</option></select></label>
+        <label class="setting-row"><span>Editor layout</span><select id="setting-layout"><option value="horizontal">Horizontal</option><option value="vertical">Vertical</option></select></label>
+        <label class="setting-row"><span>Default language</span><select id="setting-language"><option value="html">HTML</option><option value="css">CSS</option><option value="javascript">JavaScript</option><option value="python">Python</option></select></label>
+      </div>
+      <div class="settings-note"><span class="note-icon">i</span><p>Your source code stays in this browser session. Preferences reset when this editor session ends.</p></div>
+      <div class="modal-actions"><button class="tool-button" value="cancel">Done</button></div>
+    </form>
+  </dialog>
+
+  <div class="toast-region" id="toast-region" aria-live="polite"></div>
+  <script type="module" src="./js/app.js"></script>
+
+
+</body></html>

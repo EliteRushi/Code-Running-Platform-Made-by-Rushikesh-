@@ -1,0 +1,7 @@
+{
+  "routes": [
+    { "path": "/", "title": "Code Playground" },
+    { "path": "/index.html", "title": "Code Playground" },
+    { "path": "/output.html", "title": "Code Output" }
+  ]
+}

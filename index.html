@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A private browser-based code playground for HTML, CSS, JavaScript, and Python.">
+  <title>Code Playground</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body data-theme="dark">
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand-lockup">
+        <a class="brand-mark" href="./index.html" aria-label="Code Playground home"><span>{</span><i></i><span>></span></a>
+        <div>
+          <a class="brand-name" href="./index.html">Code Playground</a>
+          <span class="session-label"><span class="status-dot"></span> Temporary session</span>
+        </div>
+      </div>
+      <nav class="command-bar" aria-label="Workspace actions">
+        <button class="tool-button subtle" id="home-btn" title="Go to the editor home">Home</button>
+        <span class="toolbar-divider"></span>
+        <button class="tool-button" id="new-file-btn"><span class="button-icon">＋</span> New file</button>
+        <button class="tool-button" id="open-file-btn"><span class="button-icon">↥</span> Open</button>
+        <button class="tool-button" id="save-file-btn"><span class="button-icon">↓</span> Save</button>
+        <button class="tool-button run-button" id="run-btn"><span class="run-icon">▶</span> Run code <kbd>⌘↵</kbd></button>
+        <button class="tool-button" id="open-output-btn">Open output</button>
+        <button class="tool-button subtle" id="reset-btn">Reset</button>
+        <button class="icon-button" id="theme-toggle" title="Toggle theme" aria-label="Toggle theme">☼</button>
+        <button class="icon-button" id="settings-btn" title="Open settings" aria-label="Open settings">⚙</button>
+      </nav>
+      <input type="file" id="file-input" multiple hidden>
+    </header>
+
+    <main class="workspace" id="workspace">
+      <aside class="panel explorer-panel" id="explorer-panel">
+        <div class="panel-heading">
+          <div>
+            <span class="eyebrow">Workspace</span>
+            <h2>Files</h2>
+          </div>
+          <button class="panel-action" id="explorer-new-btn" aria-label="New file" title="New file">＋</button>
+        </div>
+        <div class="project-tree" id="file-list" role="tree" aria-label="Project files"></div>
+        <div class="explorer-footer">
+          <span class="file-count" id="file-count">0 files</span>
+          <div class="explorer-footer-actions"><button class="text-button" id="download-project-btn">ZIP</button><button class="text-button danger-text" id="clear-project-btn">Clear project</button></div>
+        </div>
+      </aside>
+      <div class="resize-handle" data-resize="files" role="separator" aria-label="Resize file explorer" tabindex="0"></div>
+
+      <section class="panel editor-panel" id="editor-panel">
+        <div class="editor-heading">
+          <div class="open-tabs" id="open-tabs" role="tablist" aria-label="Open files"></div>
+          <div class="editor-actions">
+            <span class="language-badge" id="language-badge">HTML</span>
+            <span class="dirty-indicator" id="dirty-indicator" hidden>Unsaved changes</span>
+          </div>
+        </div>
+        <div class="editor-host" id="editor-host">
+          <div class="editor-empty" id="editor-empty" hidden>
+            <div class="empty-glyph">{ }</div>
+            <h3>No file selected</h3>
+            <p>Create or open a file to start writing code.</p>
+            <button class="tool-button run-button" id="empty-new-btn">＋ New file</button>
+          </div>
+          <div id="code-editor" aria-label="Code editor"></div>
+        </div>
+        <div class="editor-footer">
+          <span id="cursor-position">Ln 1, Col 1</span>
+          <span class="footer-spacer"></span>
+          <span id="encoding-label">UTF-8</span>
+          <span id="language-footer">HTML</span>
+        </div>
+      </section>
+      <div class="resize-handle" data-resize="preview" role="separator" aria-label="Resize output preview" tabindex="0"></div>
+
+      <aside class="panel preview-panel" id="preview-panel">
+        <div class="panel-heading preview-heading">
+          <div>
+            <span class="eyebrow">Live surface</span>
+            <h2>Output</h2>
+          </div>
+          <div class="preview-tools">
+            <span class="run-status" id="run-status"><span class="status-dot neutral"></span> Ready</span>
+            <button class="icon-button small" id="refresh-preview-btn" title="Refresh output" aria-label="Refresh output">↻</button>
+          </div>
+        </div>
+        <div class="preview-stage" id="preview-stage">
+          <div class="preview-empty" id="preview-empty">
+            <div class="preview-orbit"><span></span><span></span><span></span></div>
+            <h3>Run your project</h3>
+            <p>The result will appear in this isolated preview.</p>
+            <button class="tool-button run-button" id="preview-run-btn"><span class="run-icon">▶</span> Run code</button>
+          </div>
+          <div class="terminal-output" id="terminal-output" hidden>
+            <div class="terminal-header"><span>Python output</span><span id="python-runtime-status">Ready</span></div>
+            <pre id="python-output-text" aria-live="polite"></pre>
+            <div class="python-input-row" id="python-input-row" hidden>
+              <label for="python-input">Program input</label>
+              <div class="input-with-button"><input id="python-input" type="text" autocomplete="off" placeholder="Input is requested in a browser prompt"><button class="tool-button" id="submit-python-input">Submit</button></div>
+            </div>
+          </div>
+          <iframe id="preview-frame" title="Rendered output preview" sandbox="allow-scripts" hidden></iframe>
+        </div>
+      </aside>
+    </main>
+
+    <section class="console-dock" id="console-dock">
+      <div class="console-heading">
+        <div class="console-tabs" role="tablist" aria-label="Output details">
+          <button class="console-tab active" role="tab" aria-selected="true" data-console-tab="console">Console <span id="console-count">0</span></button>
+          <button class="console-tab" role="tab" aria-selected="false" data-console-tab="errors">Errors <span id="error-count">0</span></button>
+          <button class="console-tab" role="tab" aria-selected="false" data-console-tab="status">Status</button>
+        </div>
+        <div class="console-actions">
+          <span id="execution-status" class="execution-status">Idle</span>
+          <button class="text-button" id="copy-console-btn">Copy</button>
+          <button class="text-button" id="clear-console-btn">Clear</button>
+          <button class="text-button" id="toggle-console-btn">Hide</button>
+        </div>
+      </div>
+      <div class="console-body" id="console-body" role="log" aria-live="polite"></div>
+    </section>
+  </div>
+
+  <dialog class="modal" id="file-dialog">
+    <form method="dialog" id="file-form" class="modal-card">
+      <div class="modal-heading"><div><span class="eyebrow">Project file</span><h2 id="file-dialog-title">New file</h2></div><button class="modal-close" value="cancel" aria-label="Close">×</button></div>
+      <label class="field-label" for="file-name-input">File name</label>
+      <input class="text-input" id="file-name-input" name="fileName" placeholder="e.g. app.js" autocomplete="off" required>
+      <p class="field-help">Supported extensions: .html, .css, .js, and .py</p>
+      <div class="modal-actions"><button class="tool-button" value="cancel">Cancel</button><button class="tool-button run-button" id="file-submit-btn" value="default">Create file</button></div>
+    </form>
+  </dialog>
+
+  <dialog class="modal" id="settings-dialog">
+    <form method="dialog" class="modal-card settings-card" id="settings-form">
+      <div class="modal-heading"><div><span class="eyebrow">Workspace preferences</span><h2>Settings</h2></div><button class="modal-close" value="cancel" aria-label="Close">×</button></div>
+      <div class="settings-grid">
+        <label class="setting-row"><span>Editor theme</span><select id="setting-theme"><option value="dark">Dark</option><option value="light">Light</option></select></label>
+        <label class="setting-row"><span>Font size <output id="font-size-output">14px</output></span><input id="setting-font-size" type="range" min="12" max="24" step="1" value="14"></label>
+        <label class="setting-row"><span>Word wrap</span><input id="setting-word-wrap" type="checkbox"></label>
+        <label class="setting-row"><span>Line numbers</span><input id="setting-line-numbers" type="checkbox" checked></label>
+        <label class="setting-row"><span>Auto-save <small>Disabled by default</small></span><select id="setting-autosave"><option value="disabled">Disabled</option><option value="session">Session only</option></select></label>
+        <label class="setting-row"><span>Output mode</span><select id="setting-output-mode"><option value="same">Same page</option><option value="separate">Separate page</option></select></label>
+        <label class="setting-row"><span>Editor layout</span><select id="setting-layout"><option value="horizontal">Horizontal</option><option value="vertical">Vertical</option></select></label>
+        <label class="setting-row"><span>Default language</span><select id="setting-language"><option value="html">HTML</option><option value="css">CSS</option><option value="javascript">JavaScript</option><option value="python">Python</option></select></label>
+      </div>
+      <div class="settings-note"><span class="note-icon">i</span><p>Your source code stays in this browser session. Preferences reset when this editor session ends.</p></div>
+      <div class="modal-actions"><button class="tool-button" value="cancel">Done</button></div>
+    </form>
+  </dialog>
+
+  <div class="toast-region" id="toast-region" aria-live="polite"></div>
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>

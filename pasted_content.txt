@@ -1,0 +1,670 @@
+Project Name: Browser-Based Code Playground
+1. Project Overview
+Build a simple, modern, responsive website that functions as an online code editor and code execution environment.
+
+The website should allow users to write, edit, execute, and test code directly in their browser without installing any software.
+
+The interface should be inspired by the W3Schools Tryit Editor and Python editor:
+
+Reference: https://www.w3schools.com/python/trypython.asp?filename=demo_helloworld
+
+The website must support the following programming languages and file types:
+- HTML (.html)
+- CSS (.css)
+- JavaScript (.js)
+- Python (.py)
+Users should be able to create multiple files, connect them to each other, and execute their code.
+
+The website must have two primary pages:
+
+Page 1: Code Editor
+
+Users write, edit, manage, and run their code.
+
+Page 2: Output Viewer
+
+Displays the result of the code execution, such as a rendered webpage or program output.
+
+The entire project must be deployable on GitHub Pages.
+2. Technical Requirements
+Use only the following technologies for the main application:
+- HTML5
+- CSS3
+- Vanilla JavaScript
+For Python execution, use a browser-compatible Python runtime such as Pyodide.
+
+Do not use:
+- A backend server.
+- A database.
+- PHP or Node.js servers.
+- User account systems.
+- Cloud storage.
+- Server-side code execution.
+The application should work as a static website hosted on GitHub Pages.
+
+External libraries may be loaded from public CDNs when necessary.
+
+For example, Pyodide may be loaded from its official CDN to execute Python code in the browser.
+
+Important: The first Python execution may require an internet connection to download the Python runtime. Once loaded, Python execution can work offline if the required runtime files are cached and the browser permits their use.
+
+The editor should not transmit the user's code to a server for execution.
+3. Page 1: Code Editor Interface
+Create a clean, professional code editor inspired by W3Schools.
+A. Header
+At the top of the page, display:
+- Website logo: Code Playground
+- Home button
+- New File button
+- Open File button
+- Save File button
+- Run Code button
+- Reset Code button
+- Theme toggle
+The header should be compact and easy to navigate.
+
+The Run Code button must be prominently displayed in green.
+B. File Management Panel
+Add a file explorer on the left side of the editor.
+
+Users should be able to create and manage multiple files.
+
+Example project:
+My Project/
+│
+├── index.html
+├── style.css
+├── script.js
+└── main.py
+
+Allow users to:
+1. Create a new file.
+2. Rename a file.
+3. Delete a file.
+4. Switch between open files.
+5. Edit multiple files.
+6. Create files with different extensions.
+7. Download individual files.
+8. Download all project files together as a ZIP file.
+When a user creates a file, allow them to enter its name.
+
+Examples:
+index.html
+style.css
+script.js
+main.py
+
+The extension determines the default language mode and execution behavior.
+
+For example:
+Filename	Language	Purpose
+index.html	HTML	Defines webpage structure
+style.css	CSS	Defines webpage appearance
+script.js	JavaScript	Adds webpage functionality
+main.py	Python	Executes Python code
+
+
+If the filename is style.css, the editor should automatically enable CSS syntax highlighting.
+
+If the filename is main.py, the editor should enable Python syntax highlighting.
+
+Important: A file's extension should determine its editing mode, but not every file should execute independently. Execution must depend on the file type and the selected run configuration.
+C. Code Editor
+The central section should contain a large code editor.
+
+Use Monaco Editor or CodeMirror to provide a professional coding experience.
+
+Recommended features:
+- Syntax highlighting.
+- Line numbers.
+- Automatic indentation.
+- Bracket matching.
+- Code completion where supported.
+- Find and replace.
+- Multiple open file tabs.
+- Light and dark themes.
+- Keyboard shortcuts.
+- Error highlighting where supported.
+The editor must support writing code in HTML, CSS, JavaScript, and Python.
+
+Example HTML:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Website</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Hello World!</h1>
+    <p>This is my first webpage.</p>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+Example CSS:
+body {
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+h1 {
+    color: green;
+}
+
+Example JavaScript:
+document.querySelector("h1").addEventListener("click", function () {
+    alert("Hello from JavaScript!");
+});
+
+Example Python:
+print("Hello World!")name = input("Enter your name: ")print("Welcome,", name)
+
+
+Users should be able to modify the examples and execute them immediately.
+D. Automatic File Connection
+The application must allow files to reference one another naturally.
+
+For example, an HTML file should be able to load CSS and JavaScript using standard HTML tags.
+
+HTML:
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>My Website</h1>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
+
+CSS:
+h1 {
+    color: blue;
+}
+
+JavaScript:
+document.querySelector("h1").textContent =
+    "Connected Files Are Working!";
+
+When the user clicks Run Code, the application should:
+1. Identify the main HTML file.
+2. Collect the contents of the referenced CSS and JavaScript files.
+3. Resolve local project file references.
+4. Combine the required resources into a runnable preview.
+5. Display the final result.
+Users should not need to manually combine their HTML, CSS, and JavaScript code.
+
+Support references such as:
+<link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
+
+Also support relative file references where practical.
+
+For example:
+My Project/
+├── index.html
+├── assets/
+│   └── style.css
+└── js/
+    └── app.js
+
+The preview system should resolve references to files that exist in the in-memory project.
+
+It must display a useful error message when a referenced local file cannot be found.
+
+Implementation requirement: Since the project runs on GitHub Pages, do not assume that virtual project files automatically exist on the website's real filesystem. Implement a resource resolver that handles project files stored in browser memory.
+4. Code Execution System
+The application must determine how to execute the code based on the selected file or run configuration.
+HTML Execution
+When the user opens index.html and clicks Run Code:
+- Render the webpage.
+- Apply the connected CSS files.
+- Execute the connected JavaScript files.
+- Display the result in the output viewer.
+CSS Execution
+When the user opens a .css file and clicks Run Code:
+- Apply the CSS to a default HTML preview.
+- Display the visual result.
+Provide a default HTML template if the user has not created an HTML file.
+JavaScript Execution
+When the user opens a .js file and clicks Run Code:
+- Execute it against the preview document.
+- Display changes to the webpage.
+- Capture JavaScript errors.
+- Provide a console output area.
+The execution environment should isolate preview code from the editor interface.
+Python Execution
+When the user opens a .py file and clicks Run Code:
+- Execute Python in the browser using Pyodide.
+- Display standard output.
+- Display errors and tracebacks.
+- Support common Python operations.
+- Support standard Python libraries that are included in the runtime.
+Example:
+print("Hello World!")for i in range(1, 6):    print("Number:", i)
+
+
+Expected output:
+Hello World!
+Number: 1
+Number: 2
+Number: 3
+Number: 4
+Number: 5
+
+Support basic input operations where practical.
+
+For example:
+name = input("Enter your name: ")print("Hello", name)
+
+
+Provide an input field or interactive input panel when the Python program requests input.
+
+Do not freeze the editor while Python is executing.
+
+Include a Stop button for long-running operations where feasible.
+
+Important Python limitation: Pyodide executes Python inside the browser. It does not provide a full operating-system environment, and programs requiring arbitrary native packages, unrestricted filesystem access, or system-level processes will not necessarily work.
+
+Do not claim that every Python program can run in this environment.
+5. Page 2: Output Viewer
+Create a separate output page that displays the result of code execution.
+
+Suggested URL:
+/output.html
+
+The output page should contain:
+- A header displaying Code Output.
+- A Back to Editor button.
+- A Refresh Output button.
+- A full-width preview area.
+- A console panel.
+- An error display panel.
+- A responsive layout.
+A. Webpage Preview
+For HTML, CSS, and JavaScript projects, display the rendered webpage inside an iframe.
+
+The preview should occupy most of the available screen space.
+
+For example:
+┌────────────────────────────────────────────────────┐
+│ Code Output                    Back to Editor      │
+├────────────────────────────────────────────────────┤
+│                                                    │
+│                                                    │
+│               Rendered Webpage                     │
+│                                                    │
+│                                                    │
+├────────────────────────────────────────────────────┤
+│ Console | Errors                                    │
+└────────────────────────────────────────────────────┘
+
+The output should update whenever the user runs the code.
+B. Python Output
+For Python programs, display the program's output in a terminal-like panel.
+
+Example:
+Code Output
+────────────────────────────────────
+
+Hello World!
+Number: 1
+Number: 2
+Number: 3
+Number: 4
+Number: 5
+
+────────────────────────────────────
+Execution completed successfully.
+
+For interactive programs, provide an input field that lets users respond to Python's input() function.
+C. Output Page Communication
+The editor and output page should communicate without requiring a server.
+
+Use browser-supported techniques such as:
+- window.postMessage()
+- BroadcastChannel
+- In-memory application state where applicable.
+- Temporary browser storage where necessary.
+Prefer transferring the project directly to the output page using a safe message protocol.
+
+The receiving page should validate the message and handle missing or invalid data gracefully.
+
+Do not execute code received from arbitrary origins.
+
+Important: If the output page is opened in a separate tab, the application must explicitly transfer the current project to that tab. A normal JavaScript variable cannot automatically be shared between two independent pages.
+
+If the output page is refreshed, provide a way to rerun the last transferred code when that project is still available in memory or temporary browser storage.
+6. Editor and Output Layout
+The main editor page should use a three-panel layout.
+┌────────────────────────────────────────────────────────────┐
+│ Code Playground   New File   Save   Run Code   Settings     │
+├──────────────┬──────────────────────────┬──────────────────┤
+│              │                          │                  │
+│ FILE         │       CODE EDITOR        │     OUTPUT       │
+│ EXPLORER     │                          │     PREVIEW      │
+│              │                          │                  │
+│ index.html   │  1  <!DOCTYPE html>      │  Hello World!    │
+│ style.css    │  2  <html>               │                  │
+│ script.js    │  3  <body>               │  Rendered page   │
+│ main.py      │  4  <h1>Hello</h1>       │                  │
+│              │                          │                  │
+├──────────────┴──────────────────────────┴──────────────────┤
+│ Console | Errors | Execution Status                         │
+└────────────────────────────────────────────────────────────┘
+
+Allow users to resize the panels.
+
+On smaller screens, change the layout to stacked panels or provide tabs for:
+- Files
+- Editor
+- Output
+- Console
+The interface should remain usable on mobile devices.
+Output Layout Modes
+Provide two options:
+
+Mode 1: Same Page
+
+The output appears in a preview panel beside or below the editor.
+
+Mode 2: Separate Page
+
+The output opens at:
+/output.html
+
+The output page displays the current project's result.
+
+Allow the user to choose the preferred mode.
+7. Temporary Files and Privacy
+The application must not require a server or database.
+
+All code should be processed locally in the browser wherever possible.
+
+Implement the following rules:
+1. Keep project files in browser memory by default.
+2. Do not automatically upload source code to a server.
+3. Do not require user registration.
+4. Do not require an API key.
+5. Do not automatically save code permanently.
+6. Provide a manual download option.
+7. Provide a Clear Project button.
+8. Clear the active project when the editor session is closed, according to the chosen session-management design.
+Session Management
+Use in-memory project storage as the default.
+
+If temporary storage is needed to transfer code between pages, use sessionStorage or an equivalent temporary mechanism.
+
+Do not use localStorage or IndexedDB for automatic permanent project saving.
+
+The user should be able to close the editor and start a new session without the previous project's code being restored automatically.
+
+However, make the behavior clear:
+- Closing a separate output tab should not necessarily erase the editor's project.
+- Closing the editor tab should end that editing session.
+- Refreshing a page may clear in-memory data unless temporary session recovery is explicitly implemented.
+- Browser session-storage behavior can vary depending on how tabs are opened and duplicated.
+Provide a Clear Project button that immediately removes all project files from the active session.
+
+Ask for confirmation before clearing the project.
+8. Code Editor Settings
+Add a settings menu with the following options:
+Setting	Options
+Editor theme	Light / Dark
+Font size	12–24 px
+Word wrap	On / Off
+Line numbers	On / Off
+Auto-save	Disabled by default
+Output mode	Same page / Separate page
+Editor layout	Horizontal / Vertical
+Default language	HTML / CSS / JavaScript / Python
+
+
+Allow users to resize the editor and output panels.
+
+Save non-sensitive interface preferences for the current session if needed, but do not automatically persist the user's source code.
+9. Error Handling and Console
+Create a dedicated console section.
+
+The console should display:
+- JavaScript console messages.
+- JavaScript errors.
+- Python standard output.
+- Python errors and tracebacks.
+- Missing-file warnings.
+- Execution status.
+- Runtime initialization errors.
+Example:
+[INFO] Running index.html
+[INFO] Loaded style.css
+[INFO] Loaded script.js
+[SUCCESS] Preview updated
+
+For errors:
+[ERROR] script.js:5
+TypeError: Cannot read properties of null
+
+Add buttons to:
+- Clear console.
+- Copy console output.
+- Hide or show the console.
+- Stop execution when supported.
+Avoid showing unnecessary technical details to beginners, but make full error messages available.
+10. Code Safety and Isolation
+Because users can execute arbitrary JavaScript and HTML, security must be considered.
+
+Implement the following protections:
+- Run HTML and JavaScript previews in a sandboxed iframe.
+- Do not allow preview code to access the editor's internal DOM.
+- Validate messages exchanged between the editor and output page.
+- Do not execute code from arbitrary external messages.
+- Avoid granting unnecessary iframe permissions.
+- Provide execution timeouts where practical.
+- Avoid allowing preview code to navigate or control the main editor page.
+- Display a warning before allowing external scripts to be loaded.
+For Python, use the browser-based runtime and avoid giving programs unrestricted access to application state.
+
+Remember that a sandboxed iframe is not a complete defense against every possible browser security issue. Choose sandbox permissions carefully and test the resulting configuration.
+
+If users can load external libraries or resources, explain that those resources may be downloaded from third-party servers.
+11. GitHub Pages Deployment
+The complete project must be compatible with GitHub Pages.
+
+Use a static file structure such as:
+code-playground/
+│
+├── index.html
+├── output.html
+├── css/
+│   └── style.css
+├── js/
+│   ├── app.js
+│   ├── editor.js
+│   ├── runner.js
+│   ├── file-manager.js
+│   ├── output.js
+│   └── python-runner.js
+└── README.md
+
+Use relative paths so the project works when hosted under a GitHub repository URL, for example:
+https://username.github.io/code-playground/
+
+Do not assume that the site will always be hosted at the root domain.
+
+All internal links and assets must work when deployed as a GitHub Pages project site.
+
+Do not require:
+- Node.js at runtime.
+- A server process.
+- A database.
+- Environment variables.
+- Server-side API routes.
+- A paid hosting service.
+A build step may be used during development if necessary, but the final deployed website should consist of static files.
+Deployment Instructions
+Include a README explaining:
+1. How to create a GitHub repository.
+2. How to upload all project files.
+3. How to enable GitHub Pages.
+4. How to select the deployment branch and folder.
+5. How to access the published website.
+6. How to update the application later.
+The application must work over HTTPS.
+12. Design Requirements
+Use a modern, minimalist developer-tool design.
+Visual Style
+- White or dark background, depending on the selected theme.
+- Green Run Code button.
+- Subtle borders.
+- Rounded panels.
+- Readable monospace fonts.
+- Clear file tabs.
+- Minimal animations.
+- Professional spacing.
+- Responsive layout.
+Avoid excessive gradients, unnecessary animations, or distracting visual effects.
+
+The interface should feel like a lightweight version of an online IDE.
+Default Welcome Project
+When the website opens for the first time, load a sample project containing:
+
+index.html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My First Website</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Hello World!</h1>
+    <p>Welcome to Code Playground.</p>
+
+    <button id="myButton">Click Me</button>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+style.css
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 80px;
+    background: #f5f5f5;
+}
+
+h1 {
+    color: green;
+}
+
+button {
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+script.js
+document.getElementById("myButton").addEventListener("click", () => {
+    alert("JavaScript is working!");
+});
+
+main.py
+print("Hello World from Python!")for i in range(1, 6):    print(i)
+
+
+The sample HTML, CSS, and JavaScript files should work together immediately.
+
+The Python file should run independently using the Python execution environment.
+13. Final Deliverables
+Generate the complete working project.
+
+Provide:
+1. index.html — Main code editor.
+2. output.html — Separate output page.
+3. css/style.css — Application styling.
+4. js/app.js — Main application logic.
+5. js/editor.js — Editor initialization and configuration.
+6. js/runner.js — HTML, CSS, and JavaScript execution.
+7. js/file-manager.js — File creation and management.
+8. js/output.js — Output page rendering and communication.
+9. js/python-runner.js — Python execution through Pyodide.
+10. README.md — GitHub Pages deployment instructions.
+Ensure that every file is connected correctly.
+
+Do not provide pseudocode or incomplete placeholder functions.
+
+The code should be ready to upload to GitHub Pages.
+
+Before delivering the project, verify the following:
+- HTML code executes correctly.
+- CSS code updates the preview.
+- JavaScript code executes correctly.
+- Python code executes in the browser.
+- HTML, CSS, and JavaScript files can reference one another.
+- The output works in the same page and in a separate page.
+- Console messages and errors appear correctly.
+- The file manager works.
+- The project can be downloaded.
+- The project does not automatically save source code permanently.
+- The website works when hosted under a GitHub repository subpath.
+- The application does not require a backend server or database.
+⚙️ Important Implementation Decisions
+Before building this website, there are three technical points worth getting right.
+1. HTML, CSS, JavaScript, and Python need different execution methods
+Language	Execution method	Works on GitHub Pages?
+HTML	Browser rendering	Yes
+CSS	Browser rendering	Yes
+JavaScript	Browser JavaScript engine	Yes
+Python	Pyodide or another browser-based Python runtime	Yes, with limitations
+
+
+GitHub Pages hosts static files. It does not execute Python on a server.
+
+Pyodide solves this by bringing a Python runtime into the browser. It is suitable for many educational programs and scripts.
+2. The second page needs access to the current code
+Suppose a user writes code in index.html and clicks Open Output in New Page.
+
+The application must transfer the current project to output.html.
+
+The recommended approach is:
+1. The editor collects the current contents of all project files.
+2. It opens the output page.
+3. The editor transfers the project using postMessage().
+4. The output page validates the message.
+5. The output page renders the project inside a sandboxed iframe.
+This avoids needing a database or backend.
+
+For reliable communication, the application should also handle cases where the output page loads before the editor is ready to send its code.
+3. Closing the website should clear the project
+Your requirement is that the code should not remain permanently saved.
+
+The simplest implementation is to keep the project in JavaScript memory and offer a manual download option.
+
+When the editor tab closes, its in-memory project is discarded.
+
+If the application needs to transfer code to another page, it can use temporary session storage or direct messaging. It should not automatically save the project to permanent browser storage.
+
+One important distinction: This clears the application's working copy. It cannot erase copies the user deliberately downloaded, browser history, or data independently retained by third-party resources.
+⭐ My Recommendation
+For your use case, I recommend building the website as a lightweight online IDE with two pages and four supported file types, rather than attempting to create a complete replacement for VS Code.
+
+Start with these core features:
+1. Multi-file editor: Create and edit .html, .css, .js, and .py files.
+2. Run button: Execute the selected code.
+3. Live preview: Display the webpage on the same page.
+4. Separate output page: Open the result in a new tab.
+5. Connected files: Automatically load referenced CSS and JavaScript files.
+6. Python runner: Execute Python using Pyodide.
+7. Temporary workspace: Keep source code in memory without automatic permanent saving.
+8. Download project: Export individual files or the complete project as a ZIP.
+9. GitHub Pages compatibility: Host the website without maintaining a server.
+This gives you a useful, free-to-host coding playground while keeping the architecture relatively simple.
+
+One final consideration: If you eventually want to run unrestricted Python programs, install arbitrary Python packages, or execute C++, Java, or other compiled languages, you will need a different execution architecture. Those capabilities cannot all be provided securely by a static GitHub Pages website alone.
